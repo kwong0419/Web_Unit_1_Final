@@ -1,6 +1,8 @@
 let functions = require("../lib/unit1final");
 let counter = functions.counter;
 let doubler = functions.doubler;
+let noDups = functions.noDups;
+let getAverageAge = functions.getAverageAge;
 
 describe("myEach", () => {
   beforeEach( () => {
@@ -65,6 +67,23 @@ describe('Array#myReduce', () => {
 });
 
 
+describe('myEvery', () => {
+  beforeEach( () => {
+    a = [2, 4, 6];
+  });
+
+  it("returns true if all elements match the block", () => {
+    const callback = x => x % 2 === 0;
+    expect(a.myEvery(callback)).toBe(true);
+  });
+
+  it("returns false if not all elementes match the block", () => {
+    const callback = x => x % 3 === 0;
+    expect(a.myEvery(callback)).toBe(false);
+  });
+});
+
+
 
 describe("#counter", () => {
   it("solves a simple example", () => {
@@ -100,4 +119,38 @@ describe("#doubler", () => {
     doubler(array);
     expect(array).toEqual(dupArray);
   });
+});
+
+
+describe("#noDups", () => {
+  beforeEach(() => {
+    array = [1, 2, 3, 1, 1, 2, 4];
+  });
+  it("removes all duplicats", () => {
+    expect(noDups(array)).toEqual([1, 2, 3, 4]);
+  });
+
+  it("does not modify the original array", () => {
+    const dupArray = array.slice(0);
+    noDups(array)
+    expect(array).toEqual(dupArray);
+  });
+
+});
+
+describe("#getAverageAge", () => {
+  it("find the average age", () => {
+    expect(getAverageAge([
+  { firstName: 'Maria', lastName: 'Y.',  age: 30, language: 'JavaScript' },
+  { firstName: 'Victoria', lastName: 'T.',  age: 32, language: 'Python' },
+])).toEqual(31);
+  });
+
+  it("rounds to the nearest intger", () => {
+    expect(getAverageAge([
+  { firstName: 'Maria', lastName: 'Y.',  age: 30, language: 'JavaScript' },
+  { firstName: 'Victoria', lastName: 'T.',  age: 35, language: 'Python' },
+])).toEqual(33);
+  });
+
 });
