@@ -3,6 +3,7 @@ let counter = functions.counter;
 let doubler = functions.doubler;
 let noDups = functions.noDups;
 let getAverageAge = functions.getAverageAge;
+let getMiddle = functions.getMiddle;
 
 describe("myEach", () => {
   beforeEach( () => {
@@ -17,7 +18,9 @@ describe("myEach", () => {
   });
 
   it("returns the original array", () => {
-    expect(array.myEach(callback)).toEqual([1, 2, 3]);
+    res = [];
+    array.myEach(callback)
+    expect(array).toEqual([1, 2, 3]);
   });
 });
 
@@ -91,7 +94,7 @@ describe("#counter", () => {
   });
 
   it("ignores spaces", () => {
-    expect(counter('hello world')).toEqual({ h: 1, e: 1, l: 3, o: 2, r: 1, d: 1 });
+    expect(counter('hello world')).toEqual({ h: 1, e: 1, l: 3, o: 2, w:1, r: 1, d: 1 });
   });
 
   it("case insensitve", () => {
@@ -153,4 +156,37 @@ describe("#getAverageAge", () => {
 ])).toEqual(33);
   });
 
+});
+
+
+
+describe("#counter", () => {
+  it("solves a simple example", () => {
+    expect(counter("snakes")).toEqual({ s: 2, n: 1, a: 1, k: 1, e: 1 });
+  });
+
+  it("ignores spaces", () => {
+    expect(counter('hello world')).toEqual({ h: 1, e: 1, l: 3, o: 2, w:1, r: 1, d: 1 });
+  });
+
+  it("case insensitve", () => {
+    expect(counter("aaAbc")).toEqual({ a: 3, b: 1, c: 1 });
+  });
+
+  it('returns {} when empty string is passed', () => {
+    expect(counter('')).toEqual({});
+  });
+});
+
+
+
+describe("#getMiddle", () => {
+  it("solves for an odd length strings", () => {
+    expect(getMiddle("corey")).toEqual('r');
+  });
+
+
+  it('solves for even length strings', () => {
+      expect(getMiddle("tofu")).toEqual('of');
+  });
 });
